@@ -30,7 +30,7 @@
         {
             this.button0 = new System.Windows.Forms.Button();
             this.button00 = new System.Windows.Forms.Button();
-            this.buttonDot = new System.Windows.Forms.Button();
+            this.buttonPoint = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -75,16 +75,16 @@
             this.button00.UseVisualStyleBackColor = true;
             this.button00.Click += new System.EventHandler(this.button00_Click);
             // 
-            // buttonDot
+            // buttonPoint
             // 
-            this.buttonDot.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.buttonDot.Location = new System.Drawing.Point(290, 510);
-            this.buttonDot.Name = "buttonDot";
-            this.buttonDot.Size = new System.Drawing.Size(100, 75);
-            this.buttonDot.TabIndex = 2;
-            this.buttonDot.Text = ".";
-            this.buttonDot.UseVisualStyleBackColor = true;
-            this.buttonDot.Click += new System.EventHandler(this.buttonDot_Click);
+            this.buttonPoint.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.buttonPoint.Location = new System.Drawing.Point(290, 510);
+            this.buttonPoint.Name = "buttonPoint";
+            this.buttonPoint.Size = new System.Drawing.Size(100, 75);
+            this.buttonPoint.TabIndex = 2;
+            this.buttonPoint.Text = ".";
+            this.buttonPoint.UseVisualStyleBackColor = true;
+            this.buttonPoint.Click += new System.EventHandler(this.buttonPoint_Click);
             // 
             // button1
             // 
@@ -331,7 +331,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonDot);
+            this.Controls.Add(this.buttonPoint);
             this.Controls.Add(this.button00);
             this.Controls.Add(this.button0);
             this.Name = "Form1";
@@ -346,7 +346,7 @@
 
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button button00;
-        private System.Windows.Forms.Button buttonDot;
+        private System.Windows.Forms.Button buttonPoint;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;

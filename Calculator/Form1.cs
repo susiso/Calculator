@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
@@ -9,8 +10,9 @@ namespace Calculator
         string op = ""; // + or - or * or / or =
         string mem1 = "0";
         string mem2 = "0";
+        string mem3 = "0";
         string opMem = "";
-        bool errorflag = false;
+        bool errorFlag = false;
         StrDisplay strDisplay = new StrDisplay();
 
         public Form1()
@@ -65,9 +67,16 @@ namespace Calculator
         }
 
         // Dot Button
-        private void buttonDot_Click(object sender, EventArgs e)
+        private void buttonPoint_Click(object sender, EventArgs e)
         {
-
+            if (!errorFlag)
+            {
+                if (strDisplay.Text.Length < strDisplay.MaxLength - 1 && !(strDisplay.Text.Contains(".")))
+                {
+                    strDisplay.Text += ".";
+                }
+            }
+            Display();
         }
 
         // Memory Button
@@ -83,15 +92,15 @@ namespace Calculator
 
         private void buttonMemClear_Click(object sender, EventArgs e)
         {
-    
+            
         }
 
         // Clear Button
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            if (errorflag)
+            if (errorFlag)
             {
-                errorflag = false;
+                errorFlag = false;
                 op = "";
             }
             Display("0");
@@ -99,7 +108,7 @@ namespace Calculator
 
         private void buttonAllClear_Click(object sender, EventArgs e)
         {
-            errorflag = false;
+            errorFlag = false;
             Display("0");
             mem1 = "0";
             op = "";
@@ -133,7 +142,7 @@ namespace Calculator
         // Equal Button
         private void buttonEqual_Click(object sender, EventArgs e)
         {
-            if (!errorflag)
+            if (!errorFlag)
             {
                 if (op != "")
                 {
@@ -147,13 +156,21 @@ namespace Calculator
                         mem2 = strDisplay.Text;
                     }
                     decimal result = Calculate(mem1, mem2);
-                    if (!errorflag)
+                    if (!errorFlag)
                     {
-                        string strResult = result.ToString();
-                        Display(strResult);
-                        mem1 = strResult;
-                        strDisplay.Text = "0";
-                        op = "=";
+                        string strResult = result.ToString("0.#################");
+                        if (strResult.Length > strDisplay.MaxLength)
+                        {
+                            string strError = result.ToString("E3");
+                            errorRaise("overflow  " + strError);
+                        }
+                        else
+                        {
+                            Display(strResult);
+                            mem1 = strResult;
+                            strDisplay.Text = "0";
+                            op = "=";
+                        }
                     }
                 }
             }
@@ -190,7 +207,7 @@ namespace Calculator
         }
         private void numButton(string strNum)
         {
-            if (!errorflag)
+            if (!errorFlag)
             {
                 numDisplay(strNum);
                 if (op == "=")
@@ -246,12 +263,26 @@ namespace Calculator
                     result = num1 - num2;
                     break;
                 case "*":
-                    result = num1 * num2;
+                    try
+                    {
+                        result = checked(num1 * num2);
+                    }
+                    catch (OverflowException)
+                    {
+                        errorRaise("Error (overflow)");
+                    }
                     break;
                 case "/":
                     if (num2 != 0)
                     {
-                        result = num1 / num2;
+                        try
+                        {
+                            result = checked(num1 / num2);
+                        }
+                        catch (OverflowException)
+                        {
+                            errorRaise("Error (overflow)");
+                        }
                     }
                     else
                     {
@@ -266,8 +297,9 @@ namespace Calculator
         private void errorRaise(string text)
         {
             Display(text);
-            errorflag = true;
+            errorFlag = true;
         }
+
         private class StrDisplay
         {
             public string Text;
