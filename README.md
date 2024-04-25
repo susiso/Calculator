@@ -1,6 +1,8 @@
 # 電卓アプリケーション
 整数および小数の四則演算が行える電卓です。
-![image](https://github.com/susiso/Calculator/assets/144706664/c0cc081e-8d26-47ab-a53c-43bbe5af8ef1)
+
+<img src="https://github.com/susiso/Calculator/assets/144706664/c0cc081e-8d26-47ab-a53c-43bbe5af8ef1" width="50%"/>
+
 # 仕様
 ## テキストボックス
 画面上部のテキストボックスに数字およびエラーメッセージが右詰めで表示されます。
