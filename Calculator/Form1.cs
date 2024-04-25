@@ -13,6 +13,7 @@ namespace Calculator
         string mem3 = "0";
         string opMem = "";
         bool errorFlag = false;
+        bool memFlag = false;
         StrDisplay strDisplay = new StrDisplay();
 
         public Form1()
@@ -69,6 +70,7 @@ namespace Calculator
         // Dot Button
         private void buttonPoint_Click(object sender, EventArgs e)
         {
+            memFlag = false;
             if (!errorFlag)
             {
                 if (strDisplay.Text.Length < strDisplay.MaxLength - 1 && !(strDisplay.Text.Contains(".")))
@@ -82,22 +84,31 @@ namespace Calculator
         // Memory Button
         private void buttonMemPlus_Click(object sender, EventArgs e)
         {
-
+            memOpButton("+");
         }
 
         private void buttonMemMinus_Click(object sender, EventArgs e)
         {
-
+            memOpButton("-");
         }
 
         private void buttonMemClear_Click(object sender, EventArgs e)
         {
-            
+            if (memFlag)
+            {
+                mem3 = "0";
+            }
+            else
+            {
+                Display(mem3);
+                memFlag = true;
+            }
         }
 
         // Clear Button
         private void buttonClear_Click(object sender, EventArgs e)
         {
+            memFlag = false;
             if (errorFlag)
             {
                 errorFlag = false;
@@ -108,6 +119,7 @@ namespace Calculator
 
         private void buttonAllClear_Click(object sender, EventArgs e)
         {
+            memFlag = false;
             errorFlag = false;
             Display("0");
             mem1 = "0";
@@ -142,6 +154,7 @@ namespace Calculator
         // Equal Button
         private void buttonEqual_Click(object sender, EventArgs e)
         {
+            memFlag = false;
             if (!errorFlag)
             {
                 if (op != "")
@@ -207,6 +220,7 @@ namespace Calculator
         }
         private void numButton(string strNum)
         {
+            memFlag = false;
             if (!errorFlag)
             {
                 numDisplay(strNum);
@@ -235,6 +249,7 @@ namespace Calculator
 
         private void opButton(object sender, EventArgs e)
         {
+            memFlag = false;
             if (op == "")
             {
                 mem1 = strDisplay.Text;
@@ -300,6 +315,41 @@ namespace Calculator
             errorFlag = true;
         }
 
+        private void memOpButton(string memOp)
+        {
+            memFlag = false;
+            decimal result = 0;
+            if (!errorFlag)
+            {
+                if (op != "")
+                {
+                    if (memOp == "+")
+                    {
+                        result = decimal.Parse(mem3) + decimal.Parse(mem1);
+                    }
+                    else if (memOp == "-")
+                    {
+                        result = decimal.Parse(mem3) - decimal.Parse(mem1);
+                    }
+                }
+                else
+                {
+                    if (memOp == "+")
+                    {
+                        result = decimal.Parse(mem3) + decimal.Parse(strDisplay.Text);
+                    }
+                    else if (memOp == "-") 
+                    {
+                        result = decimal.Parse(mem3) + decimal.Parse(strDisplay.Text);
+                    }
+                }
+                mem3 = result.ToString("0.#################");
+                if (mem3.Length > strDisplay.MaxLength)
+                {
+                    errorRaise("Error(mem overflow)");
+                }
+            }
+        }
         private class StrDisplay
         {
             public string Text;
