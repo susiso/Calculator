@@ -1,5 +1,6 @@
 # 電卓アプリケーション
 整数および小数の四則演算が行える電卓です。
+![image](https://github.com/susiso/Calculator/assets/144706664/c0cc081e-8d26-47ab-a53c-43bbe5af8ef1)
 # 仕様
 ## テキストボックス
 画面上部のテキストボックスに数字およびエラーメッセージが右詰めで表示されます。
@@ -43,8 +44,19 @@
 「M-」ボタンを押すと、現在テキストボックスに表示されている値をメモリの値から引きます。
 「MRC」ボタンを1回押すと、メモリに保持されている数字をテキストボックスに表示し、続けて2回押すと、メモリを0に初期化します。
 
-# 実行方法
-.NET Frameworkのインストール
-PATHを通す
-コマンドプロンプトで
-csc 
+# 実行方法（Windowsの場合）
+以下はコマンドプロンプトでの操作です。
+1. このgitリポジトリをクローンする
+```shell
+git clone https://github.com/susiso/Calculator
+```
+2. ディレクトリを移動する
+```shell
+cd Calculator/Calculator
+```
+3. Calculator.exeファイルを実行する
+```
+Calculator.exe
+```
+
+
